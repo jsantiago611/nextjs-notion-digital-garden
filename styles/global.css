@@ -15,14 +15,39 @@ html {
 
 @font-face {
     font-family: 'GT';
-    src: url('../public/fonts/GT-Alpina-VAR.woff2') format('woff2');
+    src: url('../public/fonts/GT-Alpina-Standard-Thin.woff2') format('woff2');  
+    font-style: normal;
+    font-stretch: normal;
+  }
+
+@font-face {
+    font-family: 'GT';
+    src: url('../public/fonts/GT-Alpina-Standard-Thin-Italic.woff2') format('woff2');  
+    font-style: italic;
+    font-stretch: normal;
+  }
+
+@font-face {
+    font-family: 'Calibre';
+    src: url('../public/fonts/CalibreWeb-Regular.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 400;
+    font-stretch: normal;
+  }
+
+@font-face {
+    font-family: 'Calibre';
+    src: url('../public/fonts/CalibreWeb-Bold.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 700;
     font-stretch: normal;
   }
 
 body {
-  --notion-font: 'GT', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+  --notion-font: 'Calibre', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
     'Droid Sans', 'Helvetica Neue', 'Noto Sans', sans-serif;
+  --serif-font: 'GT';
   font-family: var(--notion-font);
   overflow-x: hidden;
 }
