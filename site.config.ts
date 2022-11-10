@@ -10,7 +10,7 @@ export default siteConfig({
 
   // basic site info (required)
   name: 'Digital Disciple',
-  domain: 'nextjs-notion-starter-kit.transitivebullsh.it',
+  domain: 'https://nextjs-notion-digital-garden.vercel.app',
   author: 'Jonathan James',
 
   // open graph metadata (optional)
