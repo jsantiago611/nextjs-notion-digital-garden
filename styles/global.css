@@ -15,7 +15,7 @@ html {
 
 @font-face {
     font-family: 'GT';
-    src: url('../fonts/GT-Alpina-VAR.woff2') format('woff2');
+    src: url('../public/fonts/GT-Alpina-VAR.woff2') format('woff2');
     font-stretch: normal;
   }
 
