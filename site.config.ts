@@ -9,9 +9,9 @@ export default siteConfig({
   rootNotionSpaceId: null,
 
   // basic site info (required)
-  name: 'Next.js Notion Starter Kit',
+  name: 'Digital Disciple',
   domain: 'nextjs-notion-starter-kit.transitivebullsh.it',
-  author: 'Travis Fischer',
+  author: 'Jonathan James',
 
   // open graph metadata (optional)
   description: 'Example Next.js Notion Starter Kit Site',
