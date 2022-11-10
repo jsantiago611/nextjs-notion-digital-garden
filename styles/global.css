@@ -14,6 +14,47 @@ html {
 }
 
 @font-face {
+    font-family: 'Circular';
+    src: url('../public/fonts/lineto-circular-medium.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 500;
+    font-stretch: normal;
+  }
+
+@font-face {
+    font-family: 'Circular';
+    src: url('../public/fonts/lineto-circular-book.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 400;
+    font-stretch: normal;
+  }
+
+@font-face {
+    font-family: 'Circular';
+    src: url('../public/fonts/lineto-circular-bold.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 700;
+    font-stretch: normal;
+  }
+
+@font-face {
+    font-family: 'Circular';
+    src: url('../public/fonts/lineto-circular-black.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 800;
+    font-stretch: normal;
+  }
+
+@font-face {
+    font-family: 'National';
+    src: url('../public/fonts/National2CondensedWeb-Bold.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 700;
+    font-stretch: normal;
+  }
+
+
+@font-face {
     font-family: 'GT';
     src: url('../public/fonts/GT-Alpina-Standard-Thin.woff2') format('woff2');  
     font-style: normal;
@@ -31,7 +72,54 @@ html {
     font-family: 'Calibre';
     src: url('../public/fonts/CalibreWeb-Regular.woff2') format('woff2');
     font-style: normal;
+    font-weight: 500;
+    font-stretch: normal;
+  }
+
+@font-face {
+    font-family: 'Calibre';
+    src: url('../public/fonts/CalibreWeb-Regular.woff2') format('woff2');
+    font-style: normal;
     font-weight: 400;
+    font-stretch: normal;
+  }
+
+@font-face {
+    font-family: 'Calibre';
+    src: url('../public/fonts/CalibreWeb-SemiBold.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 600;
+    font-stretch: normal;
+  }
+
+@font-face {
+    font-family: 'Calibre';
+    src: url('../public/fonts/CalibreWeb-SemiBoldItalic.woff2') format('woff2');
+    font-style: italic;
+    font-weight: 600;
+    font-stretch: normal;
+  }
+
+@font-face {
+    font-family: 'Calibre';
+    src: url('../public/fonts/CalibreWeb-MediumItalic.woff2') format('woff2');
+    font-style: italic;
+    font-weight: 500;
+    font-stretch: normal;
+  }
+@font-face {
+    font-family: 'Calibre';
+    src: url('../public/fonts/CalibreWeb-LightItalic.woff2') format('woff2');
+    font-style: italic;
+    font-weight: 300;
+    font-stretch: normal;
+  }
+
+@font-face {
+    font-family: 'Calibre';
+    src: url('../public/fonts/CalibreWeb-Light.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 300;
     font-stretch: normal;
   }
 
