@@ -52,8 +52,23 @@ export async function getStaticPaths() {
 export default function NotionDomainDynamicPage(props) {
   return <NotionPage {...props} />
 }
+import NotionPage from '../components/NotionPage'
 
-const Page = ({ page }) => {
+interface PageProps {
+  page: {
+    id: string
+    children: {
+      title: string
+      rich_text: {
+        type: string
+        text: string
+        code: string
+      }[]
+    }[]
+  }
+}
+
+const Page: React.FC<PageProps> = ({ page }) => {
   return (
     <NotionPage key={page.id}>
       <h1>{page.children[0].title}</h1>
@@ -73,4 +88,3 @@ const Page = ({ page }) => {
 }
 
 export { Page }
-
