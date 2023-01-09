@@ -53,11 +53,11 @@ export default function NotionDomainDynamicPage(props) {
   return <NotionPage {...props} />
 }
 
-import Layout from '../components/Layout'
+import NotionPage from '../components/NotionPage'
 
 const Page = ({ page }) => {
   return (
-    <Layout key={page.id}>
+    <NotionPage key={page.id}>
       <h1>{page.children[0].title}</h1>
       {page.children[0].rich_text.map((block, i) => {
         if (block.type === 'text') {
@@ -70,8 +70,9 @@ const Page = ({ page }) => {
           )
         }
       })}
-    </Layout>
+    </NotionPage>
   )
 }
 
 export { Page }
+
