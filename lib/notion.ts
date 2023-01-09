@@ -83,3 +83,55 @@ const extractLinks = (richTextArray) => {
   }
   return [...new Set(links)]
 }
+
+//  fetch the parent page and children of each page:
+const getPageData = async (pageId) => {
+  const query = `
+    {
+      page(id: "${pageId}") {
+        id
+        parent {
+          id
+          title
+          url
+          children {
+            title
+            url
+          }
+        }
+        children {
+          title
+          url
+          rich_text
+        }
+      }
+    }
+  `
+const res = await fetch(
+  `https://api.notion.com/v3/query`,
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${process.env.NEXT_PUBLIC_NOTION_TOKEN}`
+    },
+    body: JSON.stringify({
+      query
+    })
+  }
+)
+const { page } = await res.json()
+return page
+
+  // extract the backlinks for each page using the extractLinks function and pass them to the page as a prop:
+export async function getServerSideProps({ params }) {
+  const pageId = params.id
+  const page = await getPageData(pageId)
+  const backlinks = extractLinks(page.children[0].rich_text).map(link => getPageData(link))
+  return {
+    props: {
+      page: page.children[0],
+      backlinks
+    }
+  }
+}
