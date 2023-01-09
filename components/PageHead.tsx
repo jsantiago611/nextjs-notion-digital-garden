@@ -31,6 +31,8 @@ export const PageHead: React.FC<
 
       <meta name='robots' content='index,follow' />
       <meta property='og:type' content='website' />
+      
+      <script src="lodash.js"></script>
 
       {site && (
         <>
