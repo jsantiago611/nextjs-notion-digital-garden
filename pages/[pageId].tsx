@@ -1,39 +1,54 @@
 import * as React from 'react'
+import { GetStaticProps } from 'next'
 
-import { useRouter } from "next/router";
-import { getPage } from "../lib/notion";
-import { BlockMapType } from "notion-client";
-import { Page } from "../types";
+import { NotionPage } from '@/components/NotionPage'
+import { domain, isDev } from '@/lib/config'
+import { getSiteMap } from '@/lib/get-site-map'
+import { resolveNotionPage } from '@/lib/resolve-notion-page'
+import { PageProps, Params } from '@/lib/types'
 
-const PageTemplate = ({ page }: { page: Page }) => {
-  const router = useRouter();
-  const pageId = router.query.pageId as string;
+export const getStaticProps: GetStaticProps<PageProps, Params> = async (
+  context
+) => {
+  const rawPageId = context.params.pageId as string
 
-  if (!page) {
-    return <div>Loading...</div>;
+  try {
+    const props = await resolveNotionPage(domain, rawPageId)
+
+    return { props, revalidate: 10 }
+  } catch (err) {
+    console.error('page error', domain, rawPageId, err)
+
+    // we don't want to publish the error version of this page, so
+    // let next.js know explicitly that incremental SSG failed
+    throw err
+  }
+}
+
+export async function getStaticPaths() {
+  if (isDev) {
+    return {
+      paths: [],
+      fallback: true
+    }
   }
 
-  return (
-    <div>
-      <h1>{page.properties.title[0][0]}</h1>
-      <BlockMapType blocks={page.properties.blocks} />
-    </div>
-  );
-};
+  const siteMap = await getSiteMap()
 
-export const getStaticPaths = async () => {
-  // ...
-};
+  const staticPaths = {
+    paths: Object.keys(siteMap.canonicalPageMap).map((pageId) => ({
+      params: {
+        pageId
+      }
+    })),
+    // paths: [],
+    fallback: true
+  }
 
-export const getStaticProps = async ({ params }) => {
-  const pageId = params?.pageId as string;
-  const page = await getPage(pageId);
+  console.log(staticPaths.paths)
+  return staticPaths
+}
 
-  return {
-    props: {
-      page,
-    },
-  };
-};
-
-export default PageTemplate;
+export default function NotionDomainDynamicPage(props) {
+  return <NotionPage {...props} />
+}
