@@ -66,3 +66,19 @@ export async function getPage(pageId: string): Promise<ExtendedRecordMap> {
 export async function search(params: SearchParams): Promise<SearchResults> {
   return notion.search(params)
 }
+
+const extractLinks = (richTextArray) => {
+  return flatten(
+    richTextArray.map(obj => {
+      if (obj.type === 'text') {
+        return []
+      } else if (obj.type === 'link') {
+        return obj.url
+      } else if (obj.type === 'embed') {
+        return []
+      } else {
+        return extractLinks(obj.rich_text)
+      }
+    })
+  )
+}
