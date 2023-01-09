@@ -53,7 +53,10 @@ export default function NotionDomainDynamicPage(props) {
   return <NotionPage {...props} />
 }
 
-interface PageProps {
+//chatgpt starts here
+
+
+interface MyPageProps {
   page: {
     id: string
     children: {
@@ -67,7 +70,7 @@ interface PageProps {
   }
 }
 
-const Page: React.FC<PageProps> = ({ page }) => {
+const Page: React.FC<MyPageProps> = ({ page }) => {
   return (
     <NotionPage key={page.id}>
       <h1>{page.children[0].title}</h1>
@@ -79,7 +82,7 @@ const Page: React.FC<PageProps> = ({ page }) => {
             <pre key={i}>
               <code>{block.code}</code>
             </pre>
-          )
+                      )
         }
       })}
     </NotionPage>
