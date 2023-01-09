@@ -52,3 +52,32 @@ export async function getStaticPaths() {
 export default function NotionDomainDynamicPage(props) {
   return <NotionPage {...props} />
 }
+
+const Page = ({ page, backlinks }) => {
+  return (
+    <Layout>
+      <h1>{page.title}</h1>
+      {page.rich_text.map((block, i) => {
+        if (block.type === 'text') {
+          return <p key={i}>{block.text}</p>
+        } else if (block.type === 'code') {
+          return (
+            <pre key={i}>
+              <code>{block.code}</code>
+            </pre>
+          )
+        }
+      })}
+      {backlinks && backlinks.length > 0 && (
+        <>
+          <h2>Backlinks</h2>
+          <ul>
+            {backlinks.map(backlink => (
+              <li key={backlink.id}><a href={backlink.url}>{backlink.children[0].title}</a></li>
+            ))}
+          </ul>
+        </>
+      )}
+    </Layout>
+  )
+}
