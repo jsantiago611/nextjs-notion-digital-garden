@@ -53,11 +53,13 @@ export default function NotionDomainDynamicPage(props) {
   return <NotionPage {...props} />
 }
 
-const Page = ({ page, backlinks }) => {
+import Layout from '../components/Layout'
+
+const Page = ({ page }) => {
   return (
-    <Layout>
-      <h1>{page.title}</h1>
-      {page.rich_text.map((block, i) => {
+    <Layout key={page.id}>
+      <h1>{page.children[0].title}</h1>
+      {page.children[0].rich_text.map((block, i) => {
         if (block.type === 'text') {
           return <p key={i}>{block.text}</p>
         } else if (block.type === 'code') {
@@ -68,16 +70,8 @@ const Page = ({ page, backlinks }) => {
           )
         }
       })}
-      {backlinks && backlinks.length > 0 && (
-        <>
-          <h2>Backlinks</h2>
-          <ul>
-            {backlinks.map(backlink => (
-              <li key={backlink.id}><a href={backlink.url}>{backlink.children[0].title}</a></li>
-            ))}
-          </ul>
-        </>
-      )}
     </Layout>
   )
 }
+
+export default Page
