@@ -67,40 +67,71 @@ export async function search(params: SearchParams): Promise<SearchResults> {
   return notion.search(params)
 }
 
-import fetch from 'isomorphic-unfetch'
+// Extract all links to other pages in the database from a page's rich text content
+const extractLinks = (richTextArray) => {
+  let links = []
+  for (const obj of richTextArray) {
+    if (obj.type === 'text') {
+      continue
+    } else if (obj.type === 'link') {
+      links.push(obj.url)
+    } else if (obj.type === 'embed') {
+      continue
+    } else {
+      links = links.concat(extractLinks(obj.rich_text))
+    }
+  }
+  return [...new Set(links)]
+}
 
-const getPageData = async (pageId: string) => {
+//  fetch the parent page and children of each page:
+const getPageData = async (pageId) => {
   const query = `
     {
       page(id: "${pageId}") {
         id
-        title
-        href
+        parent {
+          id
+          title
+          url
+          children {
+            title
+            url
+          }
+        }
+        children {
+          title
+          url
+          rich_text
+        }
       }
     }
   `
-  const res = await fetch(
-    `https://api.notion.com/v3/query`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_NOTION_TOKEN}`
-      },
-      body: JSON.stringify({
-        query
-      })
-    }
-  )
-  const { page } = await res.json()
-  return page
-}
+const res = await fetch(
+  `https://api.notion.com/v3/query`,
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${process.env.NEXT_PUBLIC_NOTION_TOKEN}`
+    },
+    body: JSON.stringify({
+      query
+    })
+  }
+)
+const { page } = await res.json()
+return page
 
+  // extract the backlinks for each page using the extractLinks function and pass them to the page as a prop:
 export async function getServerSideProps({ params }) {
-  const page = await getPageData(params.id)
+  const pageId = params.id
+  const page = await getPageData(pageId)
+  const backlinks = extractLinks(page.children[0].rich_text).map(link => getPageData(link))
   return {
     props: {
-      page
+      page: page.children[0],
+      backlinks
     }
   }
 }
