@@ -54,8 +54,6 @@ export default function NotionDomainDynamicPage(props) {
 }
 
 //chatgpt starts here
-
-
 interface MyPageProps {
   page: {
     id: string
@@ -71,22 +69,23 @@ interface MyPageProps {
 }
 
 const Page: React.FC<MyPageProps> = ({ page }) => {
+  const children: React.ReactElement[] = page.children[0].rich_text.map((block, i) => {
+    if (block.type === 'text') {
+      return <p key={i}>{block.text}</p>
+    } else if (block.type === 'code') {
+      return (
+        <pre key={i}>
+          <code>{block.code}</code>
+        </pre>
+      )
+    }
+  })
+
   return (
     <NotionPage key={page.id}>
       <h1>{page.children[0].title}</h1>
-      {page.children[0].rich_text.map((block, i) => {
-        if (block.type === 'text') {
-          return <p key={i}>{block.text}</p>
-        } else if (block.type === 'code') {
-          return (
-            <pre key={i}>
-              <code>{block.code}</code>
-            </pre>
-                      )
-        }
-      })}
+      {children}
     </NotionPage>
   )
 }
 
-export { Page }
