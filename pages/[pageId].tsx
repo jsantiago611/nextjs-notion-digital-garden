@@ -52,7 +52,6 @@ export async function getStaticPaths() {
 export default function NotionDomainDynamicPage(props) {
   return <NotionPage {...props} />
 }
-import NotionPage from '../components/NotionPage'
 
 interface PageProps {
   page: {
