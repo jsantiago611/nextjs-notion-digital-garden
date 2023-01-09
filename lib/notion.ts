@@ -66,3 +66,20 @@ export async function getPage(pageId: string): Promise<ExtendedRecordMap> {
 export async function search(params: SearchParams): Promise<SearchResults> {
   return notion.search(params)
 }
+
+// Extract all links to other pages in the database from a page's rich text content
+const extractLinks = (richTextArray) => {
+  let links = []
+  for (const obj of richTextArray) {
+    if (obj.type === 'text') {
+      continue
+    } else if (obj.type === 'link') {
+      links.push(obj.url)
+    } else if (obj.type === 'embed') {
+      continue
+    } else {
+      links = links.concat(extractLinks(obj.rich_text))
+    }
+  }
+  return [...new Set(links)]
+}
