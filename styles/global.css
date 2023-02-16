@@ -13,8 +13,41 @@ html {
   margin: 0;
 }
 
+@font-face {
+    font-family: 'Circular';
+    src: url('../public/fonts/CircularSpotifyTxT-Book.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 400;
+    font-stretch: normal;
+  font-display: swap;
+  }
+
+@font-face {
+    font-family: 'Circular';
+    src: url('../public/fonts/CircularSpotifyTxT-BookItalic.woff2') format('woff2');
+    font-style: italic;
+    font-weight: 400;
+    font-stretch: normal;
+  }
+
+@font-face {
+    font-family: 'Circular';
+    src: url('../public/fonts/CircularSpotifyTxT-Bold.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 700;
+    font-stretch: normal;
+  }
+
+@font-face {
+    font-family: 'Circular';
+    src: url('../public/fonts/CircularSpotifyTxT-Medium.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 500;
+    font-stretch: normal;
+  }
+
 body {
-  --notion-font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+  --notion-font: 'Circular', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
     'Droid Sans', 'Helvetica Neue', 'Noto Sans', sans-serif;
   font-family: var(--notion-font);
