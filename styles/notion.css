@@ -164,6 +164,11 @@
 .notion-title {
   display: block;
   text-align: center;
+  width: 100%;
+  font-size: clamp(2.0625rem,1.15rem + 4.56vw,5rem);
+  margin-bottom: 20px;
+  line-height: 1.1;
+  letter-spacing: -0.08ch;
 }
 
 .notion-collection-row {
