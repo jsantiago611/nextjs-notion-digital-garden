@@ -176,6 +176,8 @@
 
 .notion-title {
   display: block;
+      text-align: center;
+
   
   width: 100%;
   font-size: clamp(2.0625rem,1.15rem + 4.56vw,5rem);
@@ -183,6 +185,7 @@
   line-height: 1.1;
   letter-spacing: -0.08ch;
   font-weight: 500;
+  
 }
 
 .notion-collection-row {
