@@ -466,14 +466,14 @@
   border-radius: unset;
 }
 
-notion-h1 {
+.notion-h1 {
   font-size: clamp(1.75rem,1.19rem + 2.82vw,3.5625rem) !important;
 }
 
-notion-h2 {
+.notion-h2 {
   font-size: clamp(1.4375rem,1.11rem + 1.65vw,2.5rem) !important;
 }
 
-notion-h3 {
+.notion-h3 {
   font-size: clamp(1.1875rem,1.05rem + 0.68vw,1.625rem) !important;
 }
